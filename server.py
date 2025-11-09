@@ -23,5 +23,21 @@ def handle_message(msg):
 def get_history():
     emit('history', msg_history, room=request.sid)
 
+
+@socketio.on('clear_history')
+def clear_history(token):
+    # only allow clearing if the provided token matches the server secret
+    try:
+        if token and str(token) == app.config.get('SECRET_KEY'):
+            msg_history.clear()
+            # notify all connected clients to clear their displayed history
+            emit('history_cleared', broadcast=True)
+            # acknowledge to the requester
+            emit('clear_history_ack', {'status': 'ok'}, room=request.sid)
+        else:
+            emit('clear_history_ack', {'status': 'forbidden'}, room=request.sid)
+    except Exception:
+        emit('clear_history_ack', {'status': 'error'}, room=request.sid)
+
 if __name__ == '__main__':
     socketio.run(app, debug=True)
