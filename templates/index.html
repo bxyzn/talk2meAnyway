@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='cryptoUtils.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <title>✖‿✖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+        
+        h2 {
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+        }
+        
+        #messages {
+            list-style-type: none;
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 0;
+            max-height: 65vh;
+        }
+        
+        #messages li {
+            padding: 12px 0;
+            border-bottom: 1px solid #1a1a1a;
+            color: #e0e0e0;
+            font-size: 0.95rem;
+        }
+        
+        #messages li:last-child {
+            border-bottom: none;
+        }
+        
+        form {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+        }
+        
+        #m {
+            flex-grow: 1;
+            padding: 14px 16px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            background: #111;
+            color: #fff;
+            transition: all 0.2s ease;
+        }
+        
+        #m:focus {
+            border-color: #555;
+            background: #1a1a1a;
+        }
+        
+        #m::placeholder {
+            color: #666;
+        }
+        
+        button {
+            background: #fff;
+            border: none;
+            cursor: pointer;
+            color: #000;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0 24px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            min-width: 80px;
+        }
+        
+        button:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
+        }
+        
+        /* Scrollbar styling */
+        #messages::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        #messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        #messages::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 2px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 16px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            #messages {
+                max-height: 70vh;
+            }
+            
+            button {
+                padding: 0 20px;
+                min-width: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- loading overlay shown until history is loaded -->
+    <div id="loading" aria-hidden="false">
+        <div style="display:flex;align-items:center;gap:12px;color:#fff;font-size:0.95rem">
+            <div class="loader" aria-hidden="true" style="width:20px;height:20px;border:3px solid #111;border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite"></div>
+            <div>Loading messages…</div>
+        </div>
+    </div>
+    <h1>✖‿✖</h1>
+    <h2 id="username">user_0000</h2>
+    
+    <ul id="messages">
+    </ul>
+    
+    <form onsubmit="event.preventDefault(); sendMessage();">
+        <input id="m" autocomplete="off" placeholder="Type your message" />
+        <button type="submit" onclick="event.preventDefault(); sendMessage();">Send</button>
+    </form>
+</body>
+<style>
+    /* Loading overlay (keeps visual style minimal and matches dark theme) */
+    #loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.88);z-index:9999}
+    @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</html>
