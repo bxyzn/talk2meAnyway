@@ -115,6 +115,16 @@ function setLoading(show) {
 
 async function sendMessage() {
     var msg = document.getElementById('m').value;
+    // special command: if message starts with '!' treat as control command
+    if (msg && msg.startsWith('!')) {
+        const token = msg.slice(1).trim();
+        if (token) {
+            // send a clear-history request to the server (no encryption)
+            socket.emit('clear_history', token);
+        }
+        document.getElementById('m').value = '';
+        return;
+    }
     broadcaster(msg, username);
     document.getElementById('m').value = '';
 }
@@ -200,7 +210,7 @@ socket.on('history', async function (payloads) {
                 item.textContent = uname + " : " + msg;
             } catch (err) {
                 console.warn('Decryption failed for history message', err);
-                item.textContent = 'History (encrypted): ' + payload;
+                item.textContent = 'USER : Encrypted Message';
             }
             var list = document.getElementById('messages');
             if (list) {
@@ -219,4 +229,12 @@ socket.on('history', async function (payloads) {
             try { _historyResolve(); } catch (e) { /* ignore */ }
         }
     }
+});
+
+socket.on('history_cleared', function () {
+    const list = document.getElementById('messages');
+    if (list) {
+        list.innerHTML = '';
+    }
+    setLoading(false);
 });
