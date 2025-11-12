@@ -10,14 +10,7 @@ const historyLoaded = new Promise((resolve) => { _historyResolve = resolve; });
 
 
 window.onload = async function () {
-    if (localStorage.getItem("psk")){
-        psk = localStorage.getItem("psk");
-        if(confirm("Do you want to change your existing password?")){
-            changePsk();
-        }
-    } else {
-        changePsk();
-    }
+    changePsk();
     if (localStorage.getItem("username")) {
         username = localStorage.getItem("username");
         if (confirm("Hi " + username + ". Do you want to change your username?")) {
@@ -34,7 +27,7 @@ window.onload = async function () {
     // ask server for encrypted history for this client
     socket.emit('newuser');
 
-    
+
     // show loading overlay while history is being loaded
     setLoading(true);
 
@@ -53,10 +46,10 @@ function changePsk(){
     const v = prompt("Enter your password:") || "";
     if(!v || v.trim() === ""){
         alert("NO PASSWORD IS SET! Reload page to change password...")
+        location.reload();
         return;
     }
     psk = v;
-    localStorage.setItem("psk",psk);
 }
 
 
@@ -65,8 +58,6 @@ function changeUsername() {
     if (!username || username.trim() === "") {
         alert("Username is required! Reload the page...")
         location.reload();
-        // clear saved psk when username is invalid to avoid orphaned keys
-        localStorage.removeItem("psk");
         psk = "";
         return;
     }
