@@ -6,7 +6,7 @@
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='cryptoUtils.js') }}"></script>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
-    <title>✖‿✖</title>
+    <title>ฅ^•ﻌ•^ฅ</title>
     <style>
         * {
             margin: 0;
@@ -21,7 +21,7 @@
 
         body {
             background: #000;
-            color: #fff;
+            color: #e74c3c;
             line-height: 1.6;
             max-width: 600px;
             margin: 0 auto;
@@ -31,13 +31,16 @@
             flex-direction: column;
         }
         
-        h1 {
-            font-size: 1.8rem;
-            font-weight: 300;
+        .ascii-art {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            line-height: 1.1;
             text-align: center;
             margin-bottom: 8px;
-            color: #fff;
+            color: #e74c3c;
             letter-spacing: -0.5px;
+            white-space: pre;
+            text-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
         }
         
         h2 {
@@ -45,7 +48,7 @@
             font-weight: 400;
             text-align: center;
             margin-bottom: 30px;
-            color: #666;
+            color: #c0392b;
         }
         
         #messages {
@@ -59,8 +62,9 @@
         #messages li {
             padding: 12px 0;
             border-bottom: 1px solid #1a1a1a;
-            color: #e0e0e0;
+            color: #e74c3c;
             font-size: 0.95rem;
+            font-family: 'Courier New', monospace;
         }
         
         #messages li:last-child {
@@ -71,7 +75,6 @@
             display: flex;
             gap: 12px;
             margin-top: auto;
-            /* keep the input area pinned to the bottom on mobile */
             position: sticky;
             bottom: env(safe-area-inset-bottom, 0);
             z-index: 2;
@@ -82,26 +85,28 @@
         #m {
             flex-grow: 1;
             padding: 14px 16px;
-            border: 1px solid #333;
+            border: 1px solid #330000;
             border-radius: 8px;
             font-size: 0.95rem;
             outline: none;
             background: #111;
-            color: #fff;
+            color: #e74c3c;
             transition: all 0.2s ease;
+            font-family: 'Courier New', monospace;
         }
         
         #m:focus {
-            border-color: #555;
-            background: #1a1a1a;
+            border-color: #5c1a1a;
+            background: #1a0a0a;
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.2);
         }
         
         #m::placeholder {
-            color: #666;
+            color: #662222;
         }
         
         button {
-            background: #fff;
+            background: #e74c3c;
             border: none;
             cursor: pointer;
             color: #000;
@@ -111,11 +116,13 @@
             border-radius: 8px;
             transition: all 0.2s ease;
             min-width: 80px;
+            font-family: 'Courier New', monospace;
         }
         
         button:hover {
-            background: #f0f0f0;
+            background: #ff5544;
             transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
         }
         
         /* Scrollbar styling */
@@ -128,27 +135,30 @@
         }
         
         #messages::-webkit-scrollbar-thumb {
-            background: #333;
+            background: #330000;
             border-radius: 2px;
+        }
+        
+        #messages::-webkit-scrollbar-thumb:hover {
+            background: #5c1a1a;
         }
         
         /* Responsive adjustments */
         @media (max-width: 600px) {
             body {
-            border: none;
-            cursor: pointer;
-            color: #000;
-            font-size: 0.95rem;
-            font-weight: 500;
+                border: none;
+                cursor: pointer;
+                color: #e74c3c;
+                font-size: 0.95rem;
+                font-weight: 500;
                 padding: 16px;
             }
             
-            h1 {
-                font-size: 1.6rem;
+            .ascii-art {
+                font-size: 8px;
             }
             
             #messages {
-                /* allow messages area to grow with viewport on phones */
                 max-height: none;
             }
             
@@ -157,17 +167,31 @@
                 min-width: 70px;
             }
         }
+
+        @media (max-width: 480px) {
+            .ascii-art {
+                font-size: 6px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- loading overlay shown until history is loaded -->
     <div id="loading" aria-hidden="false">
-        <div style="display:flex;align-items:center;gap:12px;color:#fff;font-size:0.95rem">
-            <div class="loader" aria-hidden="true" style="width:20px;height:20px;border:3px solid #111;border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite"></div>
+        <div style="display:flex;align-items:center;gap:12px;color:#e74c3c;font-size:0.95rem;font-family: 'Courier New', monospace;">
+            <div class="loader" aria-hidden="true" style="width:20px;height:20px;border:3px solid #111;border-top-color:#e74c3c;border-radius:50%;animation:spin 1s linear infinite"></div>
             <div>Loading messages…</div>
         </div>
     </div>
-    <h1>✖‿✖</h1>
+    
+    <div class="ascii-art">
+  __         .__   __   ________                   _____                                       
+_╱  │______  │  │ │  │ _╲_____  ╲  _____   ____   ╱  _  ╲   ____ ___.__.__  _  _______  ___.__.
+╲   __╲__  ╲ │  │ │  │╱ ╱╱  ____╱ ╱     ╲_╱ __ ╲ ╱  ╱_╲  ╲ ╱    <   │  │╲ ╲╱ ╲╱ ╱╲__  ╲<   │  │
+ │  │  ╱ __ ╲│  │_│    <╱       ╲│  Y Y  ╲  ___╱╱    │    ╲   │  ╲___  │ ╲     ╱  ╱ __ ╲╲___  │
+ │__│ (____  ╱____╱__│_ ╲_______ ╲__│_│  ╱╲___  >____│__  ╱___│  ╱ ____│  ╲╱╲_╱  (____  ╱ ____│
+           ╲╱          ╲╱       ╲╱     ╲╱     ╲╱        ╲╱     ╲╱╲╱                   ╲╱╲╱     
+    </div>
     <h2 id="username">user_0000</h2>
     
     <ul id="messages">
