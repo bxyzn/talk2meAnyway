@@ -49,7 +49,7 @@ function changePsk(){
         location.reload();
         return;
     }
-    psk = v;
+    psk = v.trim();
 }
 
 
