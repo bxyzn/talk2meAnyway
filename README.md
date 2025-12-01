@@ -1,8 +1,6 @@
 # talk2meAnyway❤️‍🩹
 ### Where secrets stay secret
 
-[Try it live](https://walle-hmj0.onrender.com/)  
-
 "no1 knows" is a zero-knowledge messaging platform that ensures your conversations remain exactly that - known to no one but the intended recipients. Built on robust end-to-end encryption (E2EE), it demonstrates how modern web applications can provide absolute privacy through client-side cryptography and zero-trust server architecture.
 
 What happens in no1 knows, stays in no1 knows - because even we can't peek inside your messages. 🔒✨
@@ -13,7 +11,6 @@ What happens in no1 knows, stays in no1 knows - because even we can't peek insid
 
 - High-level overview
 - Key features
-- Live trial
 - Quick start (run locally)
 - How it works (low-level / data flow)
 - Security model & considerations
@@ -36,10 +33,6 @@ This README focuses on this repository: how to run it, what it does, and the sec
 - Symmetric session keys derived from asymmetric key exchange
 - Minimal Flask + Socket.IO relay server that never decrypts messages
 - Lightweight UI (no frameworks) for straightforward inspection
-
-## Live demo
-
-https://walle-hmj0.onrender.com/ (demo for evaluation and learning only)
 
 ## Quick start (run locally)
 
