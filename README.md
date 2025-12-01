@@ -22,8 +22,6 @@ What happens in no1 knows, stays in no1 knows - because even we can't peek insid
 
 "talk2meAnyway" is a compact educational demo that shows how a web app can keep messages private by performing all cryptography in the browser while the server stays deliberately blind (it only relays or stores ciphertext).
 
-Try it live: https://walle-hmj0.onrender.com/
-
 This README focuses on this repository: how to run it, what it does, and the security trade-offs.
 
 ## Quick summary
